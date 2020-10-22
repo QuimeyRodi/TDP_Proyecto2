@@ -22,6 +22,7 @@ import Logica.Opcion;
 import Logica.Sudoku;
 import Logica.Temporizador;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
@@ -111,7 +112,7 @@ public class GUI_sudoku extends JFrame {
 
 		} catch (FileException e) {
 			JOptionPane.showMessageDialog(contentPane, "ARCHIVO INVALIDO", "ERROR", JOptionPane.ERROR_MESSAGE);
-
+			System.exit(0);;		
 		}
 	}
 
@@ -193,14 +194,29 @@ public class GUI_sudoku extends JFrame {
 
 		panel_tablero.setLayout(new GridLayout(9, 0, 0, 0));
 
-		for (int i = 0; i < mi_sudoku.get_filas(); i++) {
-			for (int j = 0; j < mi_sudoku.get_filas(); j++) {
-				Celda celda = mi_sudoku.getCelda(i, j);
+		for (int f = 0; f < mi_sudoku.get_filas(); f++) {
+			for (int c = 0; c < mi_sudoku.get_filas(); c++) {
+				Celda celda = mi_sudoku.getCelda(f, c);
 				ImageIcon grafico = celda.getEntidad_grafica().getGrafico();
 				JLabel label_celda = new JLabel();
 
+				if((f%3)==0 && (c%3)==0) {
+		            label_celda.setBorder(BorderFactory.createMatteBorder(4, 4, 1, 1, Color.DARK_GRAY));
+		        }else {
+		            if((f%3)==0) {
+		                label_celda.setBorder(BorderFactory.createMatteBorder(4, 1, 1, 1, Color.DARK_GRAY));
+		            }else {
+		                if((c%3)==0) {
+		                    label_celda.setBorder(BorderFactory.createMatteBorder(1, 4, 1, 1, Color.DARK_GRAY));
+		                }else {
+		                    label_celda.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
+		                }
+		            }
+		        }
+				
+				
 				panel_tablero.add(label_celda);
-				tablero[i][j] = label_celda;
+				tablero[f][c] = label_celda;
 				label_celda.setOpaque(true);
 
 				if (!celda.esta_habilitada()) {
@@ -380,24 +396,27 @@ public class GUI_sudoku extends JFrame {
 	}
 
 	private void pintar_cuadrantes() {
-		for (int f = 0; f < 3; f++)
-			for (int c = 0; c < 3; c++)
-				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-
-		for (int f = 0; f < 3; f++)
-			for (int c = 6; c < 9; c++)
-				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-
-		for (int f = 3; f < 6; f++)
-			for (int c = 3; c < 6; c++)
-				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-
-		for (int f = 6; f < 9; f++)
-			for (int c = 0; c < 3; c++)
-				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-
-		for (int f = 6; f < 9; f++)
-			for (int c = 6; c < 9; c++)
-				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-	}
+//		for (int f = 0; f < 3; f++)
+//			for (int c = 0; c < 3; c++)
+//				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+//
+//		for (int f = 0; f < 3; f++)
+//			for (int c = 6; c < 9; c++)
+//				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+//
+//		for (int f = 3; f < 6; f++)
+//			for (int c = 3; c < 6; c++)
+//				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+//
+//		for (int f = 6; f < 9; f++)
+//			for (int c = 0; c < 3; c++)
+//				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+//
+//		for (int f = 6; f < 9; f++)
+//			for (int c = 6; c < 9; c++)
+//				tablero[f][c].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+//	
+		
+		}
+		
 }
